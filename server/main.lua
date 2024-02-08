@@ -1,8 +1,11 @@
+local qbrCore = exports['qbr-core']
 
 -- Get all blips based on the player office (from it's job)
-exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, cb)
+qbrCore:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, cb)
     local src = source
-    local Player = exports['qbr-core']:GetPlayer(src)
+    local player = qbrCore:GetPlayer(src)
+
+    TriggerEvent('qbr-log:server:CreateLog', 'default', 'RangerPark - GetBlips for ' .. player.PlayerData.citizenid)
 
     --local blips = Config.Blips:filter(function (x) return x.city == 'rhodes' end)
     local blips = {
@@ -11,5 +14,5 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
         { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) }
     }
 
-    cb(blips)
+    cb(blips:filter(function (x) return x.city == 'rhodes' end))
 end)
