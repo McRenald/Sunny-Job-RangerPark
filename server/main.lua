@@ -14,5 +14,5 @@ qbrCore:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, 
         { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) }
     }
 
-    cb(blips:filter(function (x) return x.city == 'rhodes' end))
+    cb(blips)
 end)
