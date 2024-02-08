@@ -1,7 +1,7 @@
 
-RegisterCommand('rangergetblips', function ()
+RegisterCommand('blips', function ()
     exports['qbr-core']:TriggerCallback('sunny-job-rangerpark:server:getBlips', function(blips)
         --exports['qbr-core']:Notify(9, 'Blips count: ' .. blips.length, 'info', 10000)
         exports['qbr-core']:Notify(1, 'Blips OK', 'info', 10000)
     end)
-end)
+end, false)

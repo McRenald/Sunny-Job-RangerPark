@@ -1,9 +1,8 @@
-local qbrCore = exports['qbr-core']
 
 -- Get all blips based on the player office (from it's job)
-qbrCore:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, cb)
+exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, cb)
     local src = source
-    local player = qbrCore:GetPlayer(src)
+    local player = exports['qbr-core']:GetPlayer(src)
 
     TriggerEvent('qbr-log:server:CreateLog', 'default', 'RangerPark - GetBlips for ' .. player.PlayerData.citizenid)
 
