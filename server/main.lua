@@ -12,6 +12,6 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
         { city = 'blackwater', coords = vector3(-765.0071, -1291.379, 43.834983) },
         { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) }
     }
-
+    exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'GetBlips are ' .. blips)
     cb(blips)
 end)
