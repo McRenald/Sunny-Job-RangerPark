@@ -15,7 +15,7 @@ function Dump(o)
       local s = '{ '
       for k,v in pairs(o) do
          if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
+         s = s .. '['..k..'] = ' .. Dump(v) .. ','
       end
       return s .. '} '
    else
