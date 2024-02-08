@@ -1,8 +1,25 @@
 
 RegisterCommand('blips', function ()
     exports['qbr-core']:TriggerCallback('sunny-job-rangerpark:server:getBlips', function(blips)
-        --exports['qbr-core']:Notify(9, 'Blips count: ' .. blips.length, 'info', 10000)
-        --exports['qbr-core']:Notify(1, 'Blips OK', 'info', 10000)
-        exports['qbr-core']:Notify(9, 'Blips OK '.. blips[0].city, 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
+        --print(blips)
+        print(Dump(blips))
+
+        for k,v in pairs(blips) do
+            print(k, v["city"])
+        end
     end)
 end, false)
+
+function Dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
