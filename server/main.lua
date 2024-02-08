@@ -7,11 +7,13 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
     exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'GetBlips for ' .. player.PlayerData.citizenid)
 
     --local blips = Config.Blips:filter(function (x) return x.city == 'rhodes' end)
-    local blips = {
-        { city = 'rhodes', coords = vector3(1322.6829, -1321.438, 77.888961) },
-        { city = 'blackwater', coords = vector3(-765.0071, -1291.379, 43.834983) },
-        { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) }
-    }
+    local blips = {}
+
+    table.insert(blips, { city = 'rhodes', coords = vector3(1322.6829, -1321.438, 77.888961) })
+    table.insert(blips, { city = 'blackwater', coords = vector3(-765.0071, -1291.379, 43.834983) })
+    table.insert(blips, { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) })
 
     cb(blips)
+
+    exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'Return ' .. blips.length .. ' blips')
 end)
