@@ -4,7 +4,7 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
     local src = source
     local player = exports['qbr-core']:GetPlayer(src)
 
-    TriggerEvent('qbr-log:server:CreateLog', 'default', 'RangerPark - GetBlips for ' .. player.PlayerData.citizenid)
+    exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'GetBlips for ' .. player.PlayerData.citizenid)
 
     --local blips = Config.Blips:filter(function (x) return x.city == 'rhodes' end)
     local blips = {
