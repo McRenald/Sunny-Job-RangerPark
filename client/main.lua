@@ -2,10 +2,10 @@
 RegisterCommand('blips', function ()
     exports['qbr-core']:TriggerCallback('sunny-job-rangerpark:server:getBlips', function(blips)
         --print(blips)
-        print(Dump(blips))
+        --print(Dump(blips))
 
         for k,v in pairs(blips) do
-            print(k, v["city"])
+            print(k, v["city"], v["coords"])
         end
     end)
 end, false)
