@@ -8,9 +8,9 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
 
     local blips = {}
 
-    table.insert(blips, { city = 'rhodes', coords = vector3(1322.6829, -1321.438, 77.888961) })
-    table.insert(blips, { city = 'blackwater', coords = vector3(-765.0071, -1291.379, 43.834983) })
-    table.insert(blips, { city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) })
+    table.insert(blips, { city = 'rhodes', coords = vector3(1302.6829, -1321.438, 77.888961) })
+    table.insert(blips, { city = 'blackwater', coords = vector3(-725.0071, -1291.379, 43.834983) })
+    table.insert(blips, { city = 'valentine', coords = vector3(-386.2099, 797.40667, 121.51245) })
 
     cb(blips)
 
