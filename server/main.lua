@@ -14,5 +14,5 @@ exports['qbr-core']:CreateCallback('sunny-job-rangerpark:server:getBlips', funct
 
     cb(blips)
 
-    exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'Return ' .. blips .. ' blips')
+    exports['qbr-core']:ShowSuccess('sunny-job-rangerpark', 'Return blips')
 end)
