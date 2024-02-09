@@ -33,5 +33,6 @@ end, false)
 RegisterCommand('rpclear', function ()
     if NextLocation ~= nil then
         QbrCore:DeleteBlip(NextLocation.id)
+        NextLocation = nil
     end
 end, false)
