@@ -6,7 +6,7 @@ NextLocation = nil
 RunBlipType = "BLIP_AMBIENT_PED_SMALL"
 
 -- Threads
-CreateThread(function()
+/*CreateThread(function()
     while true do
         Wait(2000)
         
@@ -19,7 +19,7 @@ CreateThread(function()
             end
         end
     end
-end)
+end)*/
 
 -- Commands
 RegisterCommand('rpnext', function ()
@@ -30,7 +30,8 @@ RegisterCommand('rpnext', function ()
             QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(RunBlipType))
             QbrCore:createPrompt(nextLocation.id .. '-location', nextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
                 type = 'client',
-                event = 'sunny-job-rangerpark:client:processing'
+                event = 'sunny-job-rangerpark:client:processing',
+                args = { NextLocation }
             })
         end)
     end
@@ -44,8 +45,8 @@ RegisterCommand('rpclear', function ()
 end, false)
 
 -- Events
-RegisterNetEvent('sunny-job-rangerpark:client:processing', function()
+RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
     QbrCore:Notify(9, 'Good job', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
-    QbrCore:DeleteBlip(NextLocation.id)
+    QbrCore:DeleteBlip(location.id)
     NextLocation = nil
 end)
