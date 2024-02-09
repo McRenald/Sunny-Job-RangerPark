@@ -1,23 +1,34 @@
-QbrCore = exports['qbr-core']
+-- Config
+RunBlipType = "BLIP_AMBIENT_PED_SMALL"
 
-BlipType = "BLIP_AMBIENT_PED_SMALL"
+-- Vars
+QbrCore = exports['qbr-core']
+NextLocation = nil
 
 -- Threads
 CreateThread(function()
     while true do
-        Wait(500)
+        Wait(5000)
         
-        local playerCoords = GetEntityCoords(PlayerPedId(), true)
-        print('Coords', playerCoords.x)
+        if NextLocation ~= nil then
+            local playerCoords = GetEntityCoords(PlayerPedId(), true)
+                        
+            if GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, NextLocation.x, NextLocation.y, NextLocation.z, true) < 15 then
+                print("Player is within the area.")
+            end
+        end
     end
 end)
 
 -- Commands
 RegisterCommand('rpnext', function ()
-    QbrCore:TriggerCallback('sunny-job-rangerpark:server:getNextLocation', function(nextLocation)
-        print('nextLocation', nextLocation.id)
-        QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(BlipType))
-    end)
+    if NextLocation == nil then
+        QbrCore:TriggerCallback('sunny-job-rangerpark:server:getNextLocation', function(nextLocation)
+            print('nextLocation', nextLocation.id)
+            NextLocation = nextLocation
+            QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(BlipType))
+        end)
+    end
 end, false)
 
 RegisterCommand('rpclear', function ()
