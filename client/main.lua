@@ -47,13 +47,13 @@ end, false)
 -- Events
 RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
     QbrCore:deletePrompt(location.id)
-    QbrCore:Progressbar("robbing_player", "Traitement", 5000, false, true, {
+    QbrCore:Progressbar("hospital_revive", "Traitement", 5000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = true,
         disableCombat = true
     }, {}, {}, {}, function() -- Done
-        QbrCore:Notify(9, 'Bon travail !', 5000)
+        QbrCore:Notify(9, 'Bon travail !', 5000, 0, "hud_textures", "check", "COLOR_WHITE")
         QbrCore:DeleteBlip(location.id)
         NextLocation = nil
     end)
