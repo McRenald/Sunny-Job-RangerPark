@@ -1,5 +1,4 @@
-QbrCore = exports['qbr-core']
-Locations = Config.Locations
+local QbrCore = exports['qbr-core']
 
 -- Get all blips based on the player office (from it's job)
 QbrCore:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, cb)
@@ -8,7 +7,7 @@ QbrCore:CreateCallback('sunny-job-rangerpark:server:getBlips', function(source, 
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'GetBlips for ' .. player.PlayerData.citizenid)
 
-    cb(Locations)
+    cb(Config.Locations)
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Return blips')
 end)
@@ -20,11 +19,10 @@ QbrCore:CreateCallback('sunny-job-rangerpark:server:getNextLocation', function(s
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Get next location for ' .. player.PlayerData.citizenid)
 
-    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. Locations[math.random(#Locations)].id)
-    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. Locations[math.random(#Locations)].id)
-    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. Locations[math.random(#Locations)].id)
+    local nextLocation = Config.Locations[math.random(#Config.Locations)]
+    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Next location is ' .. nextLocation.id)
 
-    cb(Locations[math.random(#Locations)])
+    cb(nextLocation)
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Return next location')
 end)
