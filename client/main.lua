@@ -14,7 +14,7 @@ CreateThread(function()
         if NextLocation ~= nil then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)                       
             local distance = #(playerCoords - NextLocation.coords)
-            if distance < 7 and !LocationPrompt then
+            if distance < 7 and LocationPrompt == false then
                 QbrCore:createPrompt(NextLocation.id, NextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
                     type = 'client',
                     event = 'sunny-job-rangerpark:client:processing',
