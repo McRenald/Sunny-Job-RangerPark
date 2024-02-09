@@ -20,7 +20,12 @@ QbrCore:CreateCallback('sunny-job-rangerpark:server:getNextLocation', function(s
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Get next location for ' .. player.PlayerData.citizenid)
 
-    cb(Locations[math.random(#{Locations})])
+    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. math.random(#Locations))
+    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. math.random(#Locations))
+    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. math.random(#Locations))
+    QbrCore:ShowSuccess('sunny-job-rangerpark', 'Random ' .. math.random(#Locations))
+
+    cb(Locations[math.random(#Locations)])
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Return next location')
 end)
