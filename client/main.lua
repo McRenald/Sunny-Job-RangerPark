@@ -2,6 +2,7 @@
 QbrCore = exports['qbr-core']
 NextLocation = nil
 LocationPrompt = false
+IsProcessing = false
 
 -- Config
 RunBlipType = "BLIP_AMBIENT_PED_SMALL"
@@ -11,7 +12,7 @@ CreateThread(function()
     while true do
         Wait(1000)
         
-        if NextLocation ~= nil then
+        if NextLocation ~= nil and IsProcessing == false then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)                       
             local distance = #(playerCoords - NextLocation.coords)
             if distance < 7 and LocationPrompt == false then
@@ -39,8 +40,8 @@ end, false)
 RegisterCommand('rpclear', function ()
     if NextLocation ~= nil then
         QbrCore:DeleteBlip(NextLocation.id)
-        NextLocation = nil
         DeleteLocationPrompt(NextLocation)
+        NextLocation = nil
     else
         QbrCore:TriggerCallback('sunny-job-rangerpark:server:getLocations', function(locations)
             for key, value in pairs(locations) do
@@ -54,6 +55,8 @@ end, false)
 
 -- Events
 RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
+    IsProcessing = true
+
     DeleteLocationPrompt(location)
 
     QbrCore:Progressbar("hospital_revive", "Traitement", 5000, false, true, {
@@ -65,6 +68,7 @@ RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
         QbrCore:Notify(4, 'Bon travail !', 5000) -- id=2 good too
         QbrCore:DeleteBlip(location.id)
         NextLocation = nil
+        IsProcessing = false
     end)
 end)
 
