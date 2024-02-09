@@ -44,34 +44,6 @@ RegisterCommand('rpclear', function ()
     end
 end, false)
 
-RegisterCommand('notify1', function ()
-    QbrCore:Notify(1, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify2', function ()
-    QbrCore:Notify(2, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify3', function ()
-    QbrCore:Notify(3, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify4', function ()
-    QbrCore:Notify(4, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify5', function ()
-    QbrCore:Notify(5, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify6', function ()
-    QbrCore:Notify(6, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify7', function ()
-    QbrCore:Notify(7, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify8', function ()
-    QbrCore:Notify(8, 'Bon travail !', 5000)
-end, false)
-RegisterCommand('notify9', function ()
-    QbrCore:Notify(9, 'Bon travail !', 5000)
-end, false)
-
 -- Events
 RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
     QbrCore:deletePrompt(location.id)
@@ -81,7 +53,7 @@ RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
         disableMouse = true,
         disableCombat = true
     }, {}, {}, {}, function() -- Done
-        QbrCore:Notify(7, 'Bon travail !', 5000)
+        QbrCore:Notify(4, 'Bon travail !', 5000) -- id=2 good too
         QbrCore:DeleteBlip(location.id)
         NextLocation = nil
     end)
