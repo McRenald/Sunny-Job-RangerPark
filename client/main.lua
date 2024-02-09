@@ -28,7 +28,7 @@ RegisterCommand('rpnext', function ()
             print('nextLocation', nextLocation.id)
             NextLocation = nextLocation
             QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(RunBlipType))
-            QbrCore:createPrompt(nextLocation.id .. '-location', nextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
+            QbrCore:createPrompt(nextLocation.id, nextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
                 type = 'client',
                 event = 'sunny-job-rangerpark:client:processing',
                 args = { NextLocation }
@@ -46,7 +46,15 @@ end, false)
 
 -- Events
 RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
-    QbrCore:Notify(9, 'Good job', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
-    QbrCore:DeleteBlip(location.id)
-    NextLocation = nil
+    QbrCore:Progressbar("robbing_player", "Traitement", 7000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = true,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        QbrCore:Notify(9, 'Bon travail !', 5000)
+        QbrCore:DeleteBlip(location.id)
+        QbrCore:deletePrompt(location.id)
+        NextLocation = nil
+    end)
 end)
