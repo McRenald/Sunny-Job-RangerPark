@@ -1,25 +1,33 @@
 -- Vars
 QbrCore = exports['qbr-core']
 NextLocation = nil
+LocationPrompt = nil
 
 -- Config
 RunBlipType = "BLIP_AMBIENT_PED_SMALL"
 
 -- Threads
-/*CreateThread(function()
+CreateThread(function()
     while true do
-        Wait(2000)
+        Wait(1000)
         
         if NextLocation ~= nil then
-            local playerCoords = GetEntityCoords(PlayerPedId(), true)
-                       
+            local playerCoords = GetEntityCoords(PlayerPedId(), true)                       
             local distance = #(playerCoords - NextLocation.coords)
-            if distance < 7 then
-                
+            if distance < 7 and LocationPrompt == nil then
+                QbrCore:createPrompt(NextLocation.id, NextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
+                    type = 'client',
+                    event = 'sunny-job-rangerpark:client:processing',
+                    args = { NextLocation }
+                })
+            else
+                if distance > 7 and LocationPrompt ~= nil then
+                    QbrCore:deletePrompt(NextLocation.id)
+                end
             end
         end
     end
-end)*/
+end)
 
 -- Commands
 RegisterCommand('rpnext', function ()
@@ -28,11 +36,6 @@ RegisterCommand('rpnext', function ()
             print('nextLocation', nextLocation.id)
             NextLocation = nextLocation
             QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(RunBlipType))
-            QbrCore:createPrompt(nextLocation.id, nextLocation.coords, 0xF3830D8E, 'Traiter l\'arbre', { -- [J]
-                type = 'client',
-                event = 'sunny-job-rangerpark:client:processing',
-                args = { NextLocation }
-            })
         end)
     end
 end, false)
