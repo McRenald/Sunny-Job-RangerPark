@@ -79,7 +79,8 @@ function CreateLocationPrompt(location, text)
 end
 
 function DeleteLocationPrompt(location)
-    if LocationPrompt then
+    local prompts = QbrCore:getPrompt()
+    if prompts and prompts[location.id] and LocationPrompt then
         QbrCore:deletePrompt(location.id)
         LocationPrompt = false
     end
