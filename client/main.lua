@@ -1,5 +1,7 @@
 QbrCore = exports['qbr-core']
 
+BlipType = "BLIP_AMBIENT_PED_SMALL"
+
 -- Threads
 /*CreateThread(function()
     while true do
@@ -15,14 +17,15 @@ RegisterCommand('rplocations', function ()
     QbrCore:TriggerCallback('sunny-job-rangerpark:server:getBlips', function(blips)
         for key, value in pairs(blips) do
             --print(key, value.id, value.city, value.coords)
-            QbrCore:CreateBlip(value.id, value.city, value.coords.x, value.coords.y, value.coords.z, GetHashKey("BLIP_AMBIENT_PED_SMALL"))
+            QbrCore:CreateBlip(value.id, value.city, value.coords.x, value.coords.y, value.coords.z, GetHashKey(BlipType))
         end
     end)
 end, false)
 
 RegisterCommand('rpnext', function ()
     QbrCore:TriggerCallback('sunny-job-rangerpark:server:getNextLocation', function(nextLocation)
-        print('nextLocation', nextLocation)
+        print('nextLocation', nextLocation.id)
+        QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(BlipType))
     end)
 end, false)
 
