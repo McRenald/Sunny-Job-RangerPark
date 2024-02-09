@@ -34,9 +34,7 @@ RegisterCommand('rpnext', function ()
 end, false)
 
 RegisterCommand('rpclear', function ()
-    QbrCore:TriggerCallback('sunny-job-rangerpark:server:getBlips', function(blips)
-        for key, value in pairs(blips) do
-            QbrCore:DeleteBlip(value.id)
-        end
-    end)
+    if NextLocation ~= nil then
+        QbrCore:DeleteBlip(NextLocation.id)
+    end
 end, false)
