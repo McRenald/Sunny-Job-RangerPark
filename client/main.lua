@@ -44,6 +44,10 @@ RegisterCommand('rpclear', function ()
     end
 end, false)
 
+RegisterCommand('notify', function ()
+    QbrCore:Notify(7, 'Bon travail !', 5000)
+end, false)
+
 -- Events
 RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
     QbrCore:deletePrompt(location.id)
@@ -53,7 +57,7 @@ RegisterNetEvent('sunny-job-rangerpark:client:processing', function(location)
         disableMouse = true,
         disableCombat = true
     }, {}, {}, {}, function() -- Done
-        QbrCore:Notify(9, 'Bon travail !', 5000, 0, "hud_textures", "check", "COLOR_WHITE")
+        QbrCore:Notify(7, 'Bon travail !', 5000)
         QbrCore:DeleteBlip(location.id)
         NextLocation = nil
     end)
