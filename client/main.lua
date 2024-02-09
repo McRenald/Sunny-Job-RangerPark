@@ -13,7 +13,7 @@ CreateThread(function()
         if NextLocation ~= nil then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)
                        
-            local distance = GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, NextLocation.x, NextLocation.y, NextLocation.z, true)
+            local distance = #(playerCoords - NextLocation.coords)
             print('distance', distance)
         end
     end
@@ -25,7 +25,7 @@ RegisterCommand('rpnext', function ()
         QbrCore:TriggerCallback('sunny-job-rangerpark:server:getNextLocation', function(nextLocation)
             print('nextLocation', nextLocation.id)
             NextLocation = nextLocation
-            QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(BlipType))
+            QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(RunBlipType))
         end)
     end
 end, false)
