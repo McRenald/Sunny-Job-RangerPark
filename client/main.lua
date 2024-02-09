@@ -46,6 +46,12 @@ RegisterCommand('rpclear', function ()
     if NextLocation ~= nil then
         QbrCore:DeleteBlip(NextLocation.id)
         NextLocation = nil
+    else
+        QbrCore:TriggerCallback('sunny-job-rangerpark:server:getLocations', function(locations)
+            for key, value in pairs(locations) do
+                QbrCore:DeleteBlip(value.id)
+            end
+        end)
     end
 end, false)
 
