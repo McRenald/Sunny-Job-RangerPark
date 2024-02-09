@@ -7,10 +7,7 @@ QbrCore:CreateCallback('sunny-job-rangerpark:server:getNextLocation', function(s
 
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Get next location for ' .. player.PlayerData.citizenid)
 
-    local locations = Config.Locations
-    local filteredLocations = locations:filter(function (x) return x.city == 'blackwater' end)
-
-    local nextLocation = filteredLocations[math.random(#filteredLocations)]
+    local nextLocation = Config.Locations[math.random(#Config.Locations)]
     QbrCore:ShowSuccess('sunny-job-rangerpark', 'Next location is ' .. nextLocation.id)
 
     cb(nextLocation)
