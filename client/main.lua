@@ -8,16 +8,13 @@ NextLocation = nil
 -- Threads
 CreateThread(function()
     while true do
-        Wait(1000)
+        Wait(2000)
         
         if NextLocation ~= nil then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)
-                        
-            if GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, NextLocation.x, NextLocation.y, NextLocation.z, true) < 15 then
-                print("Player is within the area.")
-            else
-                print("Player is not on the location.")
-            end
+                       
+            local distance = GetDistanceBetweenCoords(playerCoords.x, playerCoords.y, playerCoords.z, NextLocation.x, NextLocation.y, NextLocation.z, true)
+            print('distance', distance)
         end
     end
 end)
