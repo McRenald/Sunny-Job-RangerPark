@@ -1,7 +1,7 @@
 Config = {}
 
-Config.Blips = {
-	{ city = 'rhodes', coords = vector3(1322.6829, -1321.438, 77.888961) },
-	{ city = 'blackwater', coords = vector3(-765.0071, -1291.379, 43.834983) },
-	{ city = 'valentine', coords = vector3(-326.2099, 797.40667, 121.51245) }
+Config.Locations = {
+	{ id = 'blackwater-1', city = 'blackwater', coords = vector3(-795.244, -1315.045, 43.319) },
+	{ id = 'blackwater-2', city = 'blackwater', coords = vector3(-818.792, -1858.483, 43.513) },
+	{ id = 'blackwater-3', city = 'blackwater', coords = vector3(-808.711, -1234.828, 43.395) }
 }
