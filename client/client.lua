@@ -14,10 +14,8 @@ CreateThread(function()
             local distance = #(playerCoords - NextLocation.coords)
             if distance < Config.MinimalDistance and LocationPrompt == false then
                 CreateLocationPrompt(NextLocation, "Traiter l'arbre")
-            else
-                if distance > Config.MinimalDistance and LocationPrompt == true then
-                    DeleteLocationPrompt(NextLocation)
-                end
+            elseif distance > Config.MinimalDistance and LocationPrompt == true then
+                DeleteLocationPrompt(NextLocation)
             end
         end
     end
