@@ -16,8 +16,6 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
     if not IsProcessing then
         IsProcessing = true
 
-        local src = source
-	    local Player = QbrCore:GetPlayer(src)
         local ped = PlayerPedId()
         local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
@@ -49,11 +47,12 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             
             -- Add money to bank account
             local payment = 0
-            --if playerData.job.onDuty then
-            print ("payment", Player.PlayerData.job.payment)
-            payment = Player.PlayerData.job.payment
-            Player.Functions.AddMoney('bank', payment)
-            --end
+            QbrCore:GetPlayerData(function(PlayerData)
+                --if playerData.job.onDuty then
+                payment = PlayerData.job.payment
+                QbrCore:TriggerCallback("sunny-job-rangerpark:server:runpayment")
+                --end
+            end)
             
             -- Notify the player
             QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment) -- id=2 good too

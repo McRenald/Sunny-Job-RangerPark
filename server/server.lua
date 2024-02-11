@@ -35,3 +35,13 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:getNextLocation", function(s
     local nextLocation = Config.Locations[math.random(#Config.Locations)]
     cb(nextLocation)
 end)
+
+-- Win reward
+QbrCore:CreateCallback("sunny-job-rangerpark:server:runpayment", function(source, cb)
+    local src = source
+    local Player = QbrCore:GetPlayer(src)
+    if Player then
+        Player.Functions.AddMoney("bank", Player.PlayerData.job.payment)
+    end
+    cb(true)
+end)
