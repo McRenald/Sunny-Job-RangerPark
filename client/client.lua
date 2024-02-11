@@ -1,11 +1,8 @@
 -- Vars
-QbrCore = exports['qbr-core']
+QbrCore = exports["qbr-core"]
 NextLocation = nil
 LocationPrompt = false
 IsProcessing = false
-
--- Config
-RunBlipType = "BLIP_AMBIENT_PED_SMALL"
 
 -- Threads
 CreateThread(function()
@@ -15,10 +12,10 @@ CreateThread(function()
         if NextLocation ~= nil and IsProcessing == false then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)                       
             local distance = #(playerCoords - NextLocation.coords)
-            if distance < 7 and LocationPrompt == false then
-                CreateLocationPrompt(NextLocation, 'Traiter l\'arbre')
+            if distance < Config.MinimalDistance and LocationPrompt == false then
+                CreateLocationPrompt(NextLocation, "Traiter l'arbre")
             else
-                if distance > 7 and LocationPrompt == true then
+                if distance > Config.MinimalDistance and LocationPrompt == true then
                     DeleteLocationPrompt(NextLocation)
                 end
             end
@@ -29,8 +26,8 @@ end)
 -- Functions
 function CreateLocationPrompt(location, text)
     QbrCore:createPrompt(location.id, location.coords, 0xF3830D8E, text, { -- [J]
-        type = 'client',
-        event = 'sunny-job-rangerpark:client:processing',
+        type = "client",
+        event = "sunny-job-rangerpark:client:processing",
         args = { location }
     })
     LocationPrompt = true
