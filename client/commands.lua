@@ -13,7 +13,7 @@ RegisterCommand("rpclear", function ()
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:getLocations", function(locations)
             for key, value in pairs(locations) do
                 QbrCore:DeleteBlip(value.id)
-                QbrCore:deletePrompt(value.id)
+                DeleteLocationPrompt(value)
             end
         end)
     end
