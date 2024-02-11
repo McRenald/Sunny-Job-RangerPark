@@ -4,7 +4,9 @@ RegisterNetEvent("sunny-job-rangerpark:client:next-location", function ()
     if NextLocation == nil then
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:getNextLocation", function(nextLocation)
             print("nextLocation", nextLocation.id)
+            -- Assign location
             NextLocation = nextLocation
+            -- Create next location blip
             QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(Config.RunBlipType))
         end)
     end
