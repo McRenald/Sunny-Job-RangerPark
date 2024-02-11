@@ -16,6 +16,10 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
     if IsProcessing == false then
         IsProcessing = true
 
+        CreateThread(function()
+            DeleteLocationPrompt(location)
+        end)
+
         QbrCore:Progressbar("rangerpark_process_tree", "Traitement", 2000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
@@ -24,7 +28,6 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
         }, {}, {}, {}, function() -- Done
             QbrCore:Notify(4, "Bon travail !", 5000) -- id=2 good too
             QbrCore:DeleteBlip(location.id)
-            DeleteLocationPrompt(location)
             NextLocation = nil
             IsProcessing = false
         end)
