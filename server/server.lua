@@ -37,7 +37,7 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:getNextLocation", function(s
 end)
 
 -- Win reward
-QbrCore:CreateCallback("sunny-job-rangerpark:server:runpayment", function(source, cb)
+QbrCore:CreateCallback("sunny-job-rangerpark:server:locationPaymentReward", function(source, cb)
     local src = source
     local Player = QbrCore:GetPlayer(src)
     if Player then

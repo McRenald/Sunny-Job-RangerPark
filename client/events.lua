@@ -50,7 +50,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             QbrCore:GetPlayerData(function(PlayerData)
                 --if playerData.job.onDuty then
                 payment = PlayerData.job.payment
-                QbrCore:TriggerCallback("sunny-job-rangerpark:server:runpayment")
+                QbrCore:TriggerCallback("sunny-job-rangerpark:server:locationPaymentReward")
                 --end
             end)
             
