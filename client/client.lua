@@ -9,12 +9,12 @@ CreateThread(function()
     while true do
         Wait(1000)
         
-        if NextLocation ~= nil and IsProcessing == false then
+        if NextLocation ~= nil and not IsProcessing then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)                       
             local distance = #(playerCoords - NextLocation.coords)
-            if distance < Config.MinimalDistance and LocationPrompt == false then
+            if distance < Config.MinimalDistance and not LocationPrompt then
                 CreateLocationPrompt(NextLocation, "Traiter l'arbre")
-            elseif distance > Config.MinimalDistance and LocationPrompt == true then
+            elseif distance > Config.MinimalDistance and LocationPrompt then
                 DeleteLocationPrompt(NextLocation)
             end
         end
