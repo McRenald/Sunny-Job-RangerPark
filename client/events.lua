@@ -1,4 +1,3 @@
-local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
 -- Events
 RegisterNetEvent("sunny-job-rangerpark:client:next-location", function ()
@@ -18,6 +17,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
         IsProcessing = true
 
         local ped = PlayerPedId()
+        local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
         CreateThread(function()
             -- Clear prompt
@@ -44,8 +44,15 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             RemoveAnimDict(dict)
             Wait(700)
             ClearPedTasks(ped)
+            -- Add money
+            local payment = 0
+            QbrCore:GetPlayerData(function (playerData)
+                --if playerData.job.onDuty then
+                payment = playerData.job.grade.payment
+                --end
+            end)
             -- Notify the player
-            QbrCore:Notify(4, "Bon travail !", 5000) -- id=2 good too
+            QbrCore:Notify(6, "Bon travail !", 5000, "Vous avez gangé $" .. payment) -- id=2 good too
             -- Clear
             QbrCore:DeleteBlip(location.id)
             NextLocation = nil
