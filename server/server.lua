@@ -40,7 +40,7 @@ end)
 QbrCore:CreateCallback("sunny-job-rangerpark:server:locationPaymentReward", function(source, cb)
     local src = source
     local Player = QbrCore:GetPlayer(src)
-    if Player then
+    if Player and Player.PlayerData.job then
         Player.Functions.AddMoney("bank", Player.PlayerData.job.payment)
     end
     cb(true)

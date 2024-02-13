@@ -17,5 +17,5 @@ RegisterCommand("rpclear", function ()
             end
         end)
     end
-    LocationPrompt = false
+    HasLocationPrompt = false
 end, false)

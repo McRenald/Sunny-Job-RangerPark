@@ -4,10 +4,8 @@ RegisterNetEvent("sunny-job-rangerpark:client:next-location", function ()
     if NextLocation == nil then
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:getNextLocation", function(nextLocation)
             print("nextLocation", nextLocation.id)
-            -- Assign location
-            NextLocation = nextLocation
             -- Create next location blip
-            QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(Config.RunBlipType))
+            CreateLocation(nextLocation)
         end)
     end
 end)
@@ -58,8 +56,8 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment) -- id=2 good too
             
             -- Clear
-            QbrCore:DeleteBlip(location.id)
-            NextLocation = nil
+            DeleteLocation(location)
+            
             IsProcessing = false
         end)
     end
