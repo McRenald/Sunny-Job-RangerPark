@@ -1,14 +1,11 @@
-local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
 -- Events
 RegisterNetEvent("sunny-job-rangerpark:client:next-location", function ()
     if NextLocation == nil then
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:getNextLocation", function(nextLocation)
             print("nextLocation", nextLocation.id)
-            -- Assign location
-            NextLocation = nextLocation
             -- Create next location blip
-            QbrCore:CreateBlip(nextLocation.id, nextLocation.city, nextLocation.coords.x, nextLocation.coords.y, nextLocation.coords.z, GetHashKey(Config.RunBlipType))
+            CreateLocation(nextLocation)
         end)
     end
 end)
@@ -18,6 +15,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
         IsProcessing = true
 
         local ped = PlayerPedId()
+        local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
         CreateThread(function()
             -- Clear prompt
@@ -44,11 +42,22 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             RemoveAnimDict(dict)
             Wait(700)
             ClearPedTasks(ped)
+            
+            -- Add money to bank account
+            local payment = 0
+            QbrCore:GetPlayerData(function(PlayerData)
+                --if playerData.job.onDuty then
+                payment = PlayerData.job.payment
+                QbrCore:TriggerCallback("sunny-job-rangerpark:server:locationPaymentReward")
+                --end
+            end)
+            
             -- Notify the player
-            QbrCore:Notify(4, "Bon travail !", 5000) -- id=2 good too
+            QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment) -- id=2 good too
+            
             -- Clear
-            QbrCore:DeleteBlip(location.id)
-            NextLocation = nil
+            DeleteLocation(location)
+            
             IsProcessing = false
         end)
     end
