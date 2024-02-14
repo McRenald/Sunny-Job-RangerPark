@@ -25,19 +25,19 @@ CreateThread(function()
     })
 end)
 
--- Get all location
-QbrCore:CreateCallback("sunny-job-rangerpark:server:getLocations", function(source, cb)
-    cb(Config.Locations)
+-- Get all missions
+QbrCore:CreateCallback("sunny-job-rangerpark:server:get-missions", function(source, cb)
+    cb(Config.Missions)
 end)
 
--- Get next location based on the player office (from it"s job)
-QbrCore:CreateCallback("sunny-job-rangerpark:server:getNextLocation", function(source, cb)
-    local nextLocation = Config.Locations[math.random(#Config.Locations)]
-    cb(nextLocation)
+-- Get next mission based on the player office (from it"s job)
+QbrCore:CreateCallback("sunny-job-rangerpark:server:get-next-mission", function(source, cb)
+    local nextMission = Config.Missions[math.random(#Config.Missions)]
+    cb(nextMission)
 end)
 
 -- Win reward
-QbrCore:CreateCallback("sunny-job-rangerpark:server:locationPaymentReward", function(source, cb)
+QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", function(source, cb)
     local src = source
     local Player = QbrCore:GetPlayer(src)
     if Player and Player.PlayerData.job then

@@ -1,25 +1,25 @@
 
 -- Events
-RegisterNetEvent("sunny-job-rangerpark:client:next-location", function ()
-    if NextLocation == nil then
-        QbrCore:TriggerCallback("sunny-job-rangerpark:server:getNextLocation", function(nextLocation)
-            print("nextLocation", nextLocation.id)
-            -- Create next location blip
-            CreateLocation(nextLocation)
+RegisterNetEvent("sunny-job-rangerpark:client:get-next-mission", function ()
+    if NextMission == nil then
+        QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-next-mission", function(nextMission)
+            print("Next Mission", nextMission.id)
+            -- Create next mission blip
+            CreateMission(nextMission)
         end)
     end
 end)
 
-RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
-    if not IsProcessing then
-        IsProcessing = true
+RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(mission)
+    if not IsMissionProcessing then
+        IsMissionProcessing = true
 
         local ped = PlayerPedId()
         local dict = "mech_ransack@shelf@h150cm@d80cm@reach_up@pickup@vertical@right_50cm@a"
 
         CreateThread(function()
             -- Clear prompt
-            DeleteLocationPrompt(location)
+            DeleteMissionPrompt(mission)
         end)
 
         CreateThread(function()
@@ -32,7 +32,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             TaskPlayAnim(ped, dict, "base", 8.0, 8.0, -1, 1, 0, false, false, false)
         end)
 
-        QbrCore:Progressbar("rangerpark_process_tree", "Traitement", 2000, false, false, {
+        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 2000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = true,
@@ -48,17 +48,17 @@ RegisterNetEvent("sunny-job-rangerpark:client:processing", function(location)
             QbrCore:GetPlayerData(function(PlayerData)
                 --if playerData.job.onDuty then
                 payment = PlayerData.job.payment
-                QbrCore:TriggerCallback("sunny-job-rangerpark:server:locationPaymentReward")
+                QbrCore:TriggerCallback("sunny-job-rangerpark:server:apply-mission-reward")
                 --end
             end)
             
             -- Notify the player
-            QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment) -- id=2 good too
+            QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment)
             
             -- Clear
-            DeleteLocation(location)
+            DeleteMission(mission)
             
-            IsProcessing = false
+            IsMissionProcessing = false
         end)
     end
 end)
