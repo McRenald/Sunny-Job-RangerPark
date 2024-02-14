@@ -1,21 +1,20 @@
 
 -- Commands
 RegisterCommand("rpnext", function ()
-    TriggerEvent("sunny-job-rangerpark:client:next-location")
+    TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
 end, false)
 
 RegisterCommand("rpclear", function ()
-    if NextLocation ~= nil then
-        QbrCore:DeleteBlip(NextLocation.id)
-        DeleteLocationPrompt(NextLocation)
-        NextLocation = nil
+    if NextMission ~= nil then
+        DeleteMissionPrompt(NextMission)
+        DeleteMission(NextMission)
     else
-        QbrCore:TriggerCallback("sunny-job-rangerpark:server:getLocations", function(locations)
-            for key, value in pairs(locations) do
-                QbrCore:DeleteBlip(value.id)
-                DeleteLocationPrompt(value)
+        QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-missions", function(missions)
+            for key, value in pairs(missions) do
+                DeleteMissionPrompt(value)
+                DeleteMission(value)
             end
         end)
     end
-    HasLocationPrompt = false
+    HasMissionPrompt = false
 end, false)
