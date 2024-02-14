@@ -27,12 +27,12 @@ end)
 
 -- Get all missions
 QbrCore:CreateCallback("sunny-job-rangerpark:server:get-missions", function(source, cb)
-    cb(Config.Missions)
+    cb(Config.Mission.Missions)
 end)
 
 -- Get next mission based on the player office (from it"s job)
 QbrCore:CreateCallback("sunny-job-rangerpark:server:get-next-mission", function(source, cb)
-    local nextMission = Config.Missions[math.random(#Config.Missions)]
+    local nextMission = Config.Mission.Missions[math.random(#Config.Mission.Missions)]
     cb(nextMission)
 end)
 
