@@ -8,13 +8,13 @@ IsMissionProcessing = false
 CreateThread(function()
     while true do
         Wait(1000)
-        
+
         if NextMission ~= nil and not IsMissionProcessing then
             local playerCoords = GetEntityCoords(PlayerPedId(), true)
             local distance = #(playerCoords - NextMission.coords)
-            if distance < Config.MinimalDistance and not HasMissionPrompt then
-                CreateMissionPrompt(NextMission, "Traiter l'arbre")
-            elseif distance > Config.MinimalDistance and HasMissionPrompt then
+            if distance < Config.Mission.MinimalDistance and not HasMissionPrompt then
+                CreateMissionPrompt(NextMission)
+            elseif distance > Config.Mission.MinimalDistance and HasMissionPrompt then
                 DeleteMissionPrompt(NextMission)
             end
         end
@@ -22,20 +22,20 @@ CreateThread(function()
 end)
 
 -- Commands
-RegisterCommand("rp_start", function ()
+RegisterCommand("rp_start", function()
     TriggerEvent("sunny-job-rangerpark:client:start-mission")
 end, false)
 
-RegisterCommand("rp_stop", function ()
+RegisterCommand("rp_stop", function()
     TriggerEvent("sunny-job-rangerpark:client:stop-mission")
 end, false)
 
 -- Events
-RegisterNetEvent("sunny-job-rangerpark:client:start-mission", function ()
+RegisterNetEvent("sunny-job-rangerpark:client:start-mission", function()
     TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
 end)
 
-RegisterNetEvent("sunny-job-rangerpark:client:stop-mission", function ()
+RegisterNetEvent("sunny-job-rangerpark:client:stop-mission", function()
     if NextMission ~= nil then
         DeleteMissionPrompt(NextMission)
         DeleteMission(NextMission)
@@ -50,7 +50,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:stop-mission", function ()
     HasMissionPrompt = false
 end)
 
-RegisterNetEvent("sunny-job-rangerpark:client:get-next-mission", function ()
+RegisterNetEvent("sunny-job-rangerpark:client:get-next-mission", function()
     if NextMission == nil then
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-next-mission", function(nextMission)
             print("Next Mission", nextMission.id)
@@ -82,7 +82,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
             TaskPlayAnim(ped, dict, "base", 8.0, 8.0, -1, 1, 0, false, false, false)
         end)
 
-        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 2000, false, false, {
+        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 7000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = true,
@@ -92,7 +92,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
             RemoveAnimDict(dict)
             Wait(700)
             ClearPedTasks(ped)
-            
+
             -- Add money to bank account
             local payment = 0
             QbrCore:GetPlayerData(function(PlayerData)
@@ -101,13 +101,13 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
                 QbrCore:TriggerCallback("sunny-job-rangerpark:server:apply-mission-reward")
                 --end
             end)
-            
+
             -- Notify the player
             QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment)
-            
+
             -- Clear
             DeleteMission(mission)
-            
+
             IsMissionProcessing = false
 
             -- Continue mission
@@ -123,15 +123,32 @@ function CreateMission(mission)
     -- Assign mission
     NextMission = mission
     -- Create the blip
-    QbrCore:CreateBlip(mission.id, mission.office, mission.coords.x, mission.coords.y, mission.coords.z, GetHashKey(Config.RunBlipType))
+    QbrCore:CreateBlip(mission.id, mission.office, mission.coords.x, mission.coords.y, mission.coords.z, GetHashKey(Config.Mission.BlipType))
+    -- Create ped if animal
+    if mission.type == "animal" then
+        QbrCore:SpawnPed(mission.id, Config.Mission.AnimalPedType, mission.coords.x, mission.coords.y, mission.coords.z, 0)
+    end
 end
 
 function DeleteMission(mission)
+    QbrCore:RemovePed(mission.id)
     QbrCore:DeleteBlip(mission.id)
     NextMission = nil
 end
 
-function CreateMissionPrompt(mission, text)
+function CreateMissionPrompt(mission)
+    local text = ""
+    Switch(mission.type) {
+        ["tree"] = function()
+            text = "Traiter l'arbre"
+        end,
+        ["animal"] = function()
+            text = "Soigner l'animal"
+        end,
+        ["check"] = function()
+            text = "Surveiller les environs"
+        end
+    }
     QbrCore:createPrompt(mission.id, mission.coords, 0xF3830D8E, text, { -- [J]
         type = "client",
         event = "sunny-job-rangerpark:client:mission-processing",
@@ -145,5 +162,17 @@ function DeleteMissionPrompt(mission)
     if prompts and prompts[mission.id] and HasMissionPrompt then
         QbrCore:deletePrompt(mission.id)
         HasMissionPrompt = false
+    end
+end
+
+-- If the default case does not have to be handled, we can use the following auxiliary function:
+function Switch(value)
+    -- Handing `cases` to the returned function allows the `switch()` function to be used with a syntax closer to c code (see the example below).
+    -- This is because lua allows the parentheses around a table type argument to be omitted if it is the only argument.
+    return function(cases)
+        local f = cases[value]
+        if (f) then
+            f()
+        end
     end
 end
