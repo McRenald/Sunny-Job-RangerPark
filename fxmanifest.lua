@@ -5,7 +5,10 @@ rdr3_warning "I acknowledge that this is a prerelease build of RedM, and I am aw
 description "Sunny RangerPark Job"
 version "0.0.1"
 
-shared_script "config.lua"
+shared_script {
+	"config.lua",
+	"functions.lua"
+}
 
 server_script "server/*.lua"
 client_script "client/*.lua"
