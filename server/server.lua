@@ -32,7 +32,12 @@ end)
 
 -- Get next mission based on the player office (from it"s job)
 QbrCore:CreateCallback("sunny-job-rangerpark:server:get-next-mission", function(source, cb)
-    local nextMission = Config.Mission.Missions[math.random(#Config.Mission.Missions)]
+    -- Assume that the player has a job in Blackwater
+    -- Later, it will be based on PlayerData.job
+    local playerCity = "blackwater"
+
+    local playerMissions = table.filter(Config.Mission.Missions, function (x) return x.city == playerCity end)
+    local nextMission = playerMissions[math.random(#playerMissions)]
     cb(nextMission)
 end)
 
