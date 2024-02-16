@@ -24,7 +24,7 @@ CreateThread(function()
         }
     })
     -- Register Item
-    QbrCore:AddItem("ranger-park-reward-voucher", {})
+    QbrCore:AddItem("ranger-park-mission-certificat", {})
 end)
 
 -- Get all missions
@@ -51,7 +51,9 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", funct
         -- Add money in bank
         Player.Functions.AddMoney("bank", Player.PlayerData.job.payment)
         -- Add item to playe inventory
-        Player.Functions.AddItem("ranger-park-reward-voucher", 1)
+        Player.Functions.AddItem("ranger-park-mission-certificat", 1)
+        -- Trigger client event
+        TriggerClientEvent("sunny-job-rangerpark:client:mission-completed", Player.PlayerData.job.payment)
     end
     cb(true)
 end)

@@ -6,12 +6,19 @@ description "Sunny RangerPark Job"
 version "0.0.1"
 
 shared_script {
-	"config.lua",
-	"functions.lua"
+	"shared/config.lua",
+	"shared/functions.lua"
 }
 
-server_script "server/*.lua"
-client_script "client/*.lua"
+server_script {
+	"server/server.lua"
+}
+
+client_script {
+	"client/client.lua",
+	"client/commands.lua",
+	"client/events.lua",
+}
 
 dependencies {
 	"qbr-core",
