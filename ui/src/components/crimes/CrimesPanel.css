@@ -1,0 +1,37 @@
+.nuiCrimes {
+  padding: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 80%;
+  margin-left: 10px;
+  height: 680px;
+  overflow-y: auto;
+}
+
+.nuiCrimesHeader {
+  font-weight: bolder;
+}
+
+.nuiCrimesDate {
+  width: 150px;
+}
+
+.nuiCrimesTable {
+  background-color: whitesmoke;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.nuiCrimesTable td {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  padding: 5px;
+}
+
+.nuiCrimesTable tr:first-child {
+  border-top: 2px solid black;
+}
+
+.nuiCrimesTable:last-child {
+  border-bottom: 2px solid black;
+}

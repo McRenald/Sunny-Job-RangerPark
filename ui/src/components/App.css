@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira Sans');
+@import url('https://fonts.googleapis.com/css2?family=Maiden Orange');
+@import url('https://fonts.googleapis.com/css2?family=Rouge Script');
+@import url('https://fonts.googleapis.com/css2?family=Homemade Apple');
+
+.nuiWrapper {
+  height: 100%;
+  display: flex;
+  font-family: "Maiden Orange";
+  font-size: x-large;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nuiWritten {
+  font-family: "Homemade Apple";
+  font-size: large;
+  font-weight: 300;
+  line-height: 20px;
+  padding-top: 5px;
+}

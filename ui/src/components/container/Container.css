@@ -1,0 +1,13 @@
+.nuiContainer {
+  background-color: #fffacb;
+  padding: 10px;
+  height: 800px;
+  width: 900px;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+  overflow: hidden;
+}
+
+.nuiColumn {
+  display: flex;
+}

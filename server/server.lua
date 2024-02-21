@@ -67,3 +67,13 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", funct
     end
     cb(true)
 end)
+
+-- Criminal records
+QbrCore:CreateCallback("sunny-job-rangerpark:server:get-criminal-records", function(source, cb)
+    local src = source
+    local player = QbrCore:GetPlayer(src)
+    if player and player.PlayerData.job and player.PlayerData.job.name == "ranger-park" then
+    end
+
+    cb({})
+end)
