@@ -21,7 +21,7 @@ CreateThread(function()
     end
 end)
 
--- Functions
+-- Functions: Mission
 function CreateMission(mission)
     -- Assign mission
     NextMission = mission

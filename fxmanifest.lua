@@ -18,6 +18,7 @@ client_script {
 	"client/client.lua",
 	"client/commands.lua",
 	"client/events.lua",
+	"client/functions.lua",
 }
 
 dependencies {

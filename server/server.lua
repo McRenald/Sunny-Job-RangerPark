@@ -69,11 +69,30 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", funct
 end)
 
 -- Criminal records
-QbrCore:CreateCallback("sunny-job-rangerpark:server:get-criminal-records", function(source, cb)
-    local src = source
-    local player = QbrCore:GetPlayer(src)
-    if player and player.PlayerData.job and player.PlayerData.job.name == "ranger-park" then
+RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(pedId, closestPedId)
+    local player = QbrCore:GetPlayer(closestPedId)
+    local playerData = {}
+    if player then
+        -- Load player data from db
+        -- DEBUG: Mock
+        playerData = {
+            id = closestPedId,
+            name = "Harry Plan",
+            birthDay = date(1875, 5, 1),
+            crimes = {
+              {
+                date = date(1900, 2, 19, 10, 0, 0),
+                level = 1,
+                description = "Arnaque vente de bois",
+              },
+              {
+                date = date(1900, 2, 20, 15, 1, 0),
+                level = 3,
+                description = "Non respect arbre",
+              },
+            },
+          }
+        -- Send data to client
+        TriggerClientEvent("sunny-job-rangerpark:client:loadCriminalRecords", pedId, playerData);
     end
-
-    cb({})
 end)

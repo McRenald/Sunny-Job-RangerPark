@@ -22,7 +22,7 @@ if (isEnvBrowser()) {
         data: useMockPlayerData(),
       },
     ]);
-  }, 1000);
+  }, 2000);
 }
 
 export default function App() {

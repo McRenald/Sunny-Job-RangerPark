@@ -15,6 +15,11 @@ export default function Container({ player }: { player: IPlayer}) {
           <CrimesPanel crimes={player.crimes} />
         </div>
       )}
+      {!player && (
+        <div className="nuiLoading">
+          Chargement en cours...
+        </div>
+      )}
     </div>
   );
 }

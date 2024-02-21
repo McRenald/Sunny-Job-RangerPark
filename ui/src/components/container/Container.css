@@ -11,3 +11,8 @@
 .nuiColumn {
   display: flex;
 }
+
+.nuiLoading {
+  width: 100%;
+  text-align: center;
+}
