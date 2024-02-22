@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { PlayerContext } from "../../contexts/PlayerContext";
 import NoCrime from "../nocrime/NoCrime";
 import CrimeSummary from "./CrimeSummary";
 import CrimeList from "./CrimeList";
-
 import "./CrimesPanel.css";
 
-const CrimesPanel = (props: { crimes: Array<ICrime> }) => {
-  const [crimes, setCrimes] = useState<Array<ICrime>>(props.crimes ?? []);
+const CrimesPanel = () => {
   const [crimeCount, setCrimeCount] = useState(0);
+  const playerCtx = useContext(PlayerContext);
 
   useEffect(() => {
-    setCrimes(props.crimes ?? []);
-    setCrimeCount(props.crimes?.length);
-  }, [props]);
+    setCrimeCount(playerCtx.crimes?.length);
+  }, [playerCtx]);
 
   return (
     <div className="nuiCrimes">
       {crimeCount ? (
         <>
-          <CrimeSummary crimes={crimes} />
-          <CrimeList crimes={crimes} />
+          <CrimeSummary />
+          <CrimeList />
         </>
       ) : (
         <NoCrime />

@@ -1,6 +1,10 @@
 import { format } from "date-fns";
+import { useContext } from "react";
+import { PlayerContext } from "../../contexts/PlayerContext";
 
-export default function CrimeList({ crimes }: { crimes: Array<ICrime> }) {
+export default function CrimeList() {
+  const playerCtx = useContext(PlayerContext);
+
   return (
     <>
       <h3>Crimes</h3>
@@ -12,18 +16,20 @@ export default function CrimeList({ crimes }: { crimes: Array<ICrime> }) {
           </tr>
         </thead>
         <tbody>
-          {crimes.map((crime, index) => {
-            return (
-              <tr key={index} className="nuiWritten">
-                <td>
-                  <div>{format(crime.date, "dd/MM/yyyy HH:mm")}</div>
-                </td>
-                <td>
-                  <div>{crime.description}</div>
-                </td>
-              </tr>
-            );
-          })}
+          {playerCtx.crimes
+            .sort((a, b) => b.date.getTime() - a.date.getTime())
+            .map((crime, index) => {
+              return (
+                <tr key={index} className="nuiWritten">
+                  <td>
+                    <div>{format(crime.date, "dd/MM/yyyy HH:mm")}</div>
+                  </td>
+                  <td>
+                    <div>{crime.description}</div>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>

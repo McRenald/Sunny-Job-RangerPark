@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { debugData } from "../utils/debugData";
 import { useNuiEvent } from "../hooks/useNuiEvent";
+import { isEnvBrowser } from "../utils/misc";
+import { PlayerContext } from "../contexts/PlayerContext";
 import Container from "./container/Container";
+import useMockPlayerData from "../mocks/PlayerDataMock";
 
 import "./App.css";
-import { isEnvBrowser } from "../utils/misc";
-import useMockPlayerData from "../mocks/PlayerDataMock";
 
 // DEBUG - TO REMOVE FOR GAME
 if (isEnvBrowser()) {
@@ -26,15 +27,17 @@ if (isEnvBrowser()) {
 }
 
 export default function App() {
-  const [player, setPlayer] = useState<IPlayer | any>();
+  const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
 
   useNuiEvent<IPlayer>("loadCriminalRecords", (data) => {
     setPlayer(data);
   });
 
   return (
-    <div className="nuiWrapper">
-      <Container player={player} />
-    </div>
+    <PlayerContext.Provider value={player}>
+      <div className="nuiWrapper">
+        <Container />
+      </div>
+    </PlayerContext.Provider>
   );
 }
