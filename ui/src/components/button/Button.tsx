@@ -1,9 +1,21 @@
 import "./Button.css";
 
-export default function Button({ content, onClick }: { content: string, onClick: any }) {
+export default function Button({
+  content,
+  onClick,
+  className
+}: {
+  content: string;
+  onClick: any;
+  className?: string
+}) {
+  let classNames = "nuiButton "
+  if (className)
+    classNames += className
+
   return (
-    <>
-      <button className="nuiButton" onClick={onClick}>{content}</button>
-    </>
+    <button type="button" className={classNames} onClick={onClick}>
+      {content}
+    </button>
   );
 }

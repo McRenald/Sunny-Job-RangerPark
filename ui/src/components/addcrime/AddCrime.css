@@ -1,0 +1,15 @@
+.nuiAddCrime {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid lightgray;
+  position: absolute;
+  height: 600px;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nuiAddCrimeTextArea {
+    width: 100%;
+}

@@ -4,7 +4,7 @@ import Button from "../button/Button";
 import Label from "../label/Label";
 import "./Player.css";
 
-const Player = (props: { player: IPlayer }) => {
+const Player = (props: { player: IPlayer, onAddCrime: any }) => {
   const visibility = useVisibility();
 
   const handleReloadClick = () => {
@@ -23,6 +23,7 @@ const Player = (props: { player: IPlayer }) => {
         content={props.player.birthDay?.toLocaleDateString()}
       />
       <Button content="Recharger" onClick={handleReloadClick} />
+      <Button content="Ajouter un crime" onClick={props.onAddCrime} />
       <Button content="Fermer" onClick={handleCloseClick} />
     </div>
   );
