@@ -96,3 +96,7 @@ RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(pe
         TriggerClientEvent("sunny-job-rangerpark:client:loadCriminalRecords", pedId, playerData);
     end
 end)
+
+RegisterNetEvent("sunny-job-rangerpark:server:add-criminal-record", function(newRecord)
+    -- Save record in db
+end)

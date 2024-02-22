@@ -3,12 +3,13 @@ import Button from "../button/Button";
 import { fetchNui } from "../../utils/fetchNui";
 import "./AddCrime.css";
 
-export default function AddCrime({ onClose }: { onClose: any }) {
+export default function AddCrime({ player, onClose }: { player: IPlayer, onClose: any }) {
   const [date, _] = useState(new Date());
   const [description, setDescription] = useState("");
 
   const handleOnSubmitClick = () => {
     fetchNui("sunny-job-rangerpark:nui:add-criminal-record", {
+      pedId: player.id,
       date: date,
       description: description,
     }).finally(() => {

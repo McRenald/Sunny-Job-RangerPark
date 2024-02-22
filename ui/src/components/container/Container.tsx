@@ -1,10 +1,9 @@
+import { useState } from "react";
 import CrimesPanel from "../crimes/CrimesPanel";
 import Player from "../player/Player";
 import Title from "../title/Title";
-
-import "./Container.css";
-import { useState } from "react";
 import AddCrime from "../addcrime/AddCrime";
+import "./Container.css";
 
 export default function Container({ player }: { player: IPlayer }) {
   const [showAddCrime, setShowAddCrime] = useState(false);
@@ -23,7 +22,7 @@ export default function Container({ player }: { player: IPlayer }) {
           <CrimesPanel crimes={player.crimes} />
         </div>
       )}
-      {showAddCrime && <AddCrime onClose={handleToggleAddCrimeClick} />}
+      {showAddCrime && <AddCrime player={player} onClose={handleToggleAddCrimeClick} />}
     </div>
   );
 }
