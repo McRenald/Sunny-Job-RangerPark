@@ -63,7 +63,7 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", funct
         -- Add item to playe inventory
         Player.Functions.AddItem("ranger-park-mission-certificate", 1)
         -- Trigger client event
-        TriggerClientEvent("sunny-job-rangerpark:client:mission-completed", Config.Mission.Payment)
+        TriggerClientEvent("sunny-job-rangerpark:client:mission-completed", source, Config.Mission.Payment)
     end
     cb(true)
 end)
