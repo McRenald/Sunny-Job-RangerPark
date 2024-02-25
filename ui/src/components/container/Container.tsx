@@ -17,8 +17,8 @@ export default function Container() {
   return (
     <div className="nuiContainer">
       <Title />
-      {!playerCtx && <div className="nuiLoading">Chargement en cours...</div>}
-      {playerCtx && (
+      {!playerCtx.id && <div className="nuiLoading">Chargement en cours...</div>}
+      {playerCtx.id && (
         <div className="nuiColumn">
           <Player onAddCrime={handleToggleAddCrimeClick} />
           <CrimesPanel />
