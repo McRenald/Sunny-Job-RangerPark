@@ -90,7 +90,7 @@ RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
     print("client:showCriminalRecords", playerId);
     
     -- DEBUG: Force to use my player
-    closestPlayer = playerId;
+    closestPlayer = 1; --playerId;
     closestPlayerDistance = 1;
 
     if closestPlayer ~= -1 and closestPlayerDistance < 3 then
