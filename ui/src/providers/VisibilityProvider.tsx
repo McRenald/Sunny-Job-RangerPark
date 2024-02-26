@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useNuiEvent } from "../hooks/useNuiEvent";
-import { fetchNui } from "../utils/fetchNui";
+import { fetchNui, postNui } from "../utils/fetchNui";
 import { isEnvBrowser } from "../utils/misc";
 
 const VisibilityCtx = createContext<VisibilityProviderValue | null>(null);
@@ -32,7 +32,7 @@ export const VisibilityProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const keyHandler = (e: KeyboardEvent) => {
       if (["Backspace", "Escape"].includes(e.code)) {
-        if (!isEnvBrowser()) fetchNui("sunny-job-rangerpark:nui:hideFrame");
+        if (!isEnvBrowser()) postNui("sunny-job-rangerpark:nui:hideFrame");
         else setVisible(!visible);
       }
     };

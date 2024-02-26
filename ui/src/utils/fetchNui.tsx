@@ -40,3 +40,27 @@ export async function fetchNui<T = unknown>(
     return Promise.reject();
   }
 }
+
+export async function postNui(
+  eventName: string,
+  data: unknown = {}
+) {
+  const options = {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  };
+
+  const resourceName = (window as any).GetParentResourceName
+    ? (window as any).GetParentResourceName()
+    : "nui-frame-app";
+
+  try {
+    await fetch(`https://${resourceName}/${eventName}`, options);
+  } catch (error) {
+    console.log("Fetch error", error);
+    return Promise.reject();
+  }
+}
