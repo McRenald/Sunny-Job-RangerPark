@@ -84,6 +84,8 @@ end)
 
 -- Events: CriminalRecords
 RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
+    print("client:showCriminalRecords");
+
     local ped = PlayerPedId()
     local closestPlayer, closestPlayerDistance = QbrCore:GetClosestPlayer(GetEntityCoords(ped))
     
@@ -100,5 +102,6 @@ RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
 end)
 
 RegisterNetEvent('sunny-job-rangerpark:client:loadCriminalRecords', function(playerData)
+    print("client:loadCriminalRecords");
     Functions.SendReactMessage('loadCriminalRecords', playerData)
 end)

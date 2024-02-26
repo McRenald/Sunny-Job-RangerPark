@@ -7,6 +7,7 @@ import Container from "./container/Container";
 import useMockPlayerData from "../mocks/PlayerDataMock";
 
 import "./App.css";
+import { fetchNui } from "../utils/fetchNui";
 
 // DEBUG - TO REMOVE FOR GAME
 if (isEnvBrowser()) {
@@ -30,6 +31,7 @@ export default function App() {
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
 
   useNuiEvent<IPlayer>("loadCriminalRecords", (data) => {
+    console.log("loadCriminalRecords", data);    
     setPlayer(data);
   });
 
