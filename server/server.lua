@@ -72,7 +72,7 @@ end)
 RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(closestPedId)
     print("server:get-criminal-records", source);
 
-    local player = QbrCore:GetPlayer(GetPlayerServerId(closestPedId))
+    local player = QbrCore:GetPlayer(closestPedId)
     local playerData = {}
     if player then
         -- Load player data from db
