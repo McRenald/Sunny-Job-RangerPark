@@ -70,8 +70,6 @@ end)
 
 -- Criminal records
 RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(closestPedId)
-    print("server:get-criminal-records", source);
-
     local player = QbrCore:GetPlayer(closestPedId)
     local playerData = {}
     if player then
