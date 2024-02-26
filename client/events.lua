@@ -95,7 +95,7 @@ RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
 
     if closestPlayer ~= -1 and closestPlayerDistance < 3 then
         Functions.ToggleNuiFrame(true)
-        TriggerServerEvent("sunny-job-rangerpark:server:get-criminal-records", ped, closestPlayer);
+        TriggerServerEvent("sunny-job-rangerpark:server:get-criminal-records", closestPlayer);
     else
         QbrCore:Notify(2, "Aucune personne proche !", 5000);
     end

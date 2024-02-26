@@ -5,20 +5,20 @@ CreateThread(function()
     -- Register the job
     QbrCore:AddJob("ranger-park", {
         label = 'Ranger Park',
-		defaultDuty = false,
-		offDutyPay = false,
-		grades = {
+        defaultDuty = false,
+        offDutyPay = false,
+        grades = {
             ['0'] = {
                 name = 'Cadet',
                 payment = 10
             },
-			['1'] = {
+            ['1'] = {
                 name = 'Ranger',
                 payment = 25
             },
-			['2'] = {
+            ['2'] = {
                 name = 'Ranger-Park',
-				isboss = true,
+                isboss = true,
                 payment = 30
             },
         }
@@ -48,7 +48,7 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:get-next-mission", function(
     -- Later, it will be based on PlayerData.job
     local playerCity = "blackwater"
 
-    local playerMissions = table.filter(Config.Mission.Missions, function (x) return x.city == playerCity end)
+    local playerMissions = table.filter(Config.Mission.Missions, function(x) return x.city == playerCity end)
     local nextMission = playerMissions[math.random(#playerMissions)]
     cb(nextMission)
 end)
@@ -69,8 +69,8 @@ QbrCore:CreateCallback("sunny-job-rangerpark:server:apply-mission-reward", funct
 end)
 
 -- Criminal records
-RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(pedId, closestPedId)
-    print("server:get-criminal-records", pedId);
+RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(closestPedId)
+    print("server:get-criminal-records", source);
 
     local player = QbrCore:GetPlayer(closestPedId)
     local playerData = {}
@@ -82,20 +82,20 @@ RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(pe
             name = "Harry Plan",
             birthDay = date(1875, 5, 1),
             crimes = {
-              {
-                date = date(1900, 2, 19, 10, 0, 0),
-                level = 1,
-                description = "Arnaque vente de bois",
-              },
-              {
-                date = date(1900, 2, 20, 15, 1, 0),
-                level = 3,
-                description = "Non respect arbre",
-              },
+                {
+                    date = date(1900, 2, 19, 10, 0, 0),
+                    level = 1,
+                    description = "Arnaque vente de bois",
+                },
+                {
+                    date = date(1900, 2, 20, 15, 1, 0),
+                    level = 3,
+                    description = "Non respect arbre",
+                },
             },
-          }
+        }
         -- Send data to client
-        TriggerClientEvent("sunny-job-rangerpark:client:loadCriminalRecords", pedId, playerData);
+        TriggerClientEvent("sunny-job-rangerpark:client:loadCriminalRecords", source, playerData);
     end
 end)
 
