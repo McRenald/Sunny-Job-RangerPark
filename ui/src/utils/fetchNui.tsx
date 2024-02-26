@@ -31,29 +31,10 @@ export async function fetchNui<T = unknown>(
     ? (window as any).GetParentResourceName()
     : "nui-frame-app";
 
-    const resp = await fetch(`https://${resourceName}/${eventName}`, options);
-    const respFormatted = await resp.json();  
-    return respFormatted;
-}
-
-export async function postNui(
-  eventName: string,
-  data: unknown = {}
-) {
-  const options = {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify(data),
-  };
-
-  const resourceName = (window as any).GetParentResourceName
-    ? (window as any).GetParentResourceName()
-    : "nui-frame-app";
-
   try {
-    await fetch(`https://${resourceName}/${eventName}`, options);
+    return fetch(`https://${resourceName}/${eventName}`, options)
+      .then((resp) => resp.json())
+      .then((data) => data);
   } catch (error) {
     console.log("Fetch error", error);
     return Promise.reject();
