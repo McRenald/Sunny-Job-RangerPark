@@ -14,7 +14,7 @@ import { isEnvBrowser } from "./misc";
 
 export async function fetchNui<T = unknown>(
   eventName: string,
-  data?: unknown,
+  data: unknown = {},
   mockData?: T
 ): Promise<T> {
   const options = {
@@ -31,9 +31,12 @@ export async function fetchNui<T = unknown>(
     ? (window as any).GetParentResourceName()
     : "nui-frame-app";
 
-  const resp = await fetch(`https://${resourceName}/${eventName}`, options);
-
-  const respFormatted = await resp.json();
-
-  return respFormatted;
+  try {
+    return fetch(`https://${resourceName}/${eventName}`, options)
+      .then((resp) => resp.json())
+      .then((data) => data);
+  } catch (error) {
+    console.log("Fetch error", error);
+    return Promise.reject();
+  }
 }

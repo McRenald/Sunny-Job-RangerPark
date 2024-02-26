@@ -21,6 +21,12 @@ client_scripts {
 	"client/functions.lua",
 }
 
+ui_page 'ui/build/index.html'
+files {
+	'ui/build/index.html',
+	'ui/build/**/*'
+}
+
 dependencies {
 	"qbr-core",
 	"qbr-inventory",

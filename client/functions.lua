@@ -1,8 +1,10 @@
-function SendReactMessage(action, data)
+Functions = {}
+
+function Functions.SendReactMessage(action, data)
     SendNUIMessage({ action = action, data = data })
 end
 
-function ToggleNuiFrame(shouldShow)
+function Functions.ToggleNuiFrame(shouldShow)
     SetNuiFocus(shouldShow, shouldShow)
-    SendReactMessage('setVisible', shouldShow)
+    Functions.SendReactMessage('setVisible', shouldShow)
 end

@@ -1,4 +1,4 @@
-RegisterNUICallback('sunny-job-rangerpark:nui:refresh-player', function(_, cb)
+RegisterNUICallback('sunny-job-rangerpark:nui:refresh-player', function(data, cb)
     TriggerEvent("sunny-job-rangerpark:client:showCriminalRecords");
     cb({})
 end)
@@ -8,7 +8,7 @@ RegisterNUICallback('sunny-job-rangerpark:nui:add-criminal-record', function(dat
     cb({})
 end)
 
-RegisterNUICallback('sunny-job-rangerpark:nui:hideFrame', function(_, cb)
-    ToggleNuiFrame(false)
+RegisterNUICallback('sunny-job-rangerpark:nui:hideFrame', function(data, cb)
+    Functions.ToggleNuiFrame(false)
     cb({})
 end)

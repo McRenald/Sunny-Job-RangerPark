@@ -86,8 +86,13 @@ end)
 RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
     local ped = PlayerPedId()
     local closestPlayer, closestPlayerDistance = QbrCore:GetClosestPlayer(GetEntityCoords(ped))
+    
+    -- DEBUG: Force to use my player
+    closestPlayer = ped;
+    closestPlayerDistance = 1;
+
     if closestPlayer ~= -1 and closestPlayerDistance < 3 then
-        ToggleNuiFrame(true)
+        Functions.ToggleNuiFrame(true)
         TriggerServerEvent("sunny-job-rangerpark:server:get-criminal-records", ped, closestPlayer);
     else
         QbrCore:Notify(2, "Aucune personne proche !", 5000);
@@ -95,5 +100,5 @@ RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
 end)
 
 RegisterNetEvent('sunny-job-rangerpark:client:loadCriminalRecords', function(playerData)
-    SendReactMessage('loadCriminalRecords', playerData)
+    Functions.SendReactMessage('loadCriminalRecords', playerData)
 end)
