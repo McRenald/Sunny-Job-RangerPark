@@ -84,10 +84,10 @@ end)
 
 -- Events: CriminalRecords
 RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
-    print("client:showCriminalRecords");
-
     local ped = PlayerPedId()
     local closestPlayer, closestPlayerDistance = QbrCore:GetClosestPlayer(GetEntityCoords(ped))
+    
+    print("client:showCriminalRecords", ped);
     
     -- DEBUG: Force to use my player
     closestPlayer = ped;
