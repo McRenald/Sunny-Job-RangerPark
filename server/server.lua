@@ -72,7 +72,7 @@ end)
 RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(closestPedId)
     print("server:get-criminal-records", source);
 
-    local player = QbrCore:GetPlayer(closestPedId)
+    local player = QbrCore:GetPlayer(GetPlayerServerId(closestPedId))
     local playerData = {}
     if player then
         -- Load player data from db
@@ -96,6 +96,8 @@ RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(cl
         }
         -- Send data to client
         TriggerClientEvent("sunny-job-rangerpark:client:loadCriminalRecords", source, playerData);
+    else
+        print("Player " .. closestPedId .. " has not been found");
     end
 end)
 
