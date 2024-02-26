@@ -9,6 +9,7 @@ RegisterNUICallback('sunny-job-rangerpark:nui:add-criminal-record', function(dat
 end)
 
 RegisterNUICallback('sunny-job-rangerpark:nui:hideFrame', function(data, cb)
+    print('sunny-job-rangerpark:nui:hideFrame');
     Functions.ToggleNuiFrame(false)
     cb({})
 end)
