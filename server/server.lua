@@ -80,7 +80,7 @@ RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(cl
         playerData = {
             id = closestPedId,
             name = "Harry Plan",
-            birthDay = "1875-06-01T00:00:00",
+            birthDay = "1875-06-01",
             crimes = {
                 {
                     date = "1900-02-19T10:00:00",
