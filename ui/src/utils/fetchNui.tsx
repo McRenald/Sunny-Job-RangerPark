@@ -32,7 +32,7 @@ export async function fetchNui<T = unknown>(
     : "nui-frame-app";
 
   try {
-    return fetch(`https://${resourceName}/${eventName}`, options)
+    return await fetch(`https://${resourceName}/${eventName}`, options)
       .then((resp) => resp.json())
       .then((data) => data);
   } catch (error) {
