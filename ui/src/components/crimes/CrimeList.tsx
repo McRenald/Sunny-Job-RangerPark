@@ -17,12 +17,12 @@ export default function CrimeList() {
         </thead>
         <tbody>
           {playerCtx.crimes
-            .sort((a, b) => b.date.getTime() - a.date.getTime())
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
             .map((crime, index) => {
               return (
                 <tr key={index} className="nuiWritten">
                   <td>
-                    <div>{format(crime.date, "dd/MM/yyyy HH:mm")}</div>
+                    <div>{format(new Date(crime.date), "dd/MM/yyyy HH:mm")}</div>
                   </td>
                   <td>
                     <div>{crime.description}</div>

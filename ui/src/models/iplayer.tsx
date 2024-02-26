@@ -2,6 +2,6 @@
 interface IPlayer {
     id: string,
     name: string,
-    birthDay: Date,
+    birthDay: string,
     crimes: Array<ICrime>
 }

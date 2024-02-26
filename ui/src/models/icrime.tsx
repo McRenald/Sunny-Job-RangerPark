@@ -1,6 +1,6 @@
 
 interface ICrime {
-    date: Date,
+    date: string,
     level: number,
     description: string
 }

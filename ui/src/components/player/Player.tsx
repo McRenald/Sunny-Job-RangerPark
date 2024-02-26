@@ -23,7 +23,7 @@ const Player = (props: { onAddCrime: any }) => {
       <Label label="Nom" content={playerCtx.name} />
       <Label
         label="Date de naissance"
-        content={playerCtx.birthDay?.toLocaleDateString()}
+        content={playerCtx.birthDay ? new Date(playerCtx.birthDay).toDateString() : "NC"}
       />
       <Button content="Recharger" onClick={handleReloadClick} />
       <Button content="Ajouter un crime" onClick={props.onAddCrime} />

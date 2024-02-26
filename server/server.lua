@@ -80,15 +80,15 @@ RegisterNetEvent("sunny-job-rangerpark:server:get-criminal-records", function(cl
         playerData = {
             id = closestPedId,
             name = "Harry Plan",
-            birthDay = "1875-06-01",
+            birthDay = "1875-06-01T00:00:00Z",
             crimes = {
                 {
-                    date = "1900-02-19T10:00:00",
+                    date = "1900-02-19T10:00:00Z",
                     level = 1,
                     description = "Arnaque vente de bois",
                 },
                 {
-                    date = "1900-02-19T11:33:00",
+                    date = "1900-02-19T11:33:00Z",
                     level = 3,
                     description = "Non respect arbre",
                 },
