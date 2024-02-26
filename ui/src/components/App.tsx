@@ -5,9 +5,7 @@ import { isEnvBrowser } from "../utils/misc";
 import { PlayerContext } from "../contexts/PlayerContext";
 import Container from "./container/Container";
 import useMockPlayerData from "../mocks/PlayerDataMock";
-
 import "./App.css";
-import { fetchNui } from "../utils/fetchNui";
 
 // DEBUG - TO REMOVE FOR GAME
 if (isEnvBrowser()) {

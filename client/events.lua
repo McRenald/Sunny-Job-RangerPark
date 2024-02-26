@@ -100,6 +100,5 @@ RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
 end)
 
 RegisterNetEvent('sunny-job-rangerpark:client:loadCriminalRecords', function(playerData)
-    print("client:loadCriminalRecords");
     Functions.SendReactMessage('loadCriminalRecords', playerData)
 end)
