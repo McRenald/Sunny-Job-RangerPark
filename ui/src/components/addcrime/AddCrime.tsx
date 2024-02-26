@@ -15,7 +15,7 @@ export default function AddCrime({ onClose }: { onClose: any }) {
 
     // DEBUG: Always add crime to player
     playerCtx.crimes.push({
-      date: date,
+      date: date.toISOString(),
       level: level,
       description: description,
     });

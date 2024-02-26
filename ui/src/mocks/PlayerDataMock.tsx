@@ -2,15 +2,15 @@ export default function useMockPlayerData(): IPlayer {
   return {
     id: "549",
     name: "Harry Plan",
-    birthDay: new Date(1875, 5, 1),
+    birthDay: "1875-06-01T00:00:00Z",
     crimes: [
       {
-        date: new Date(1900, 2, 19, 10, 0, 0),
+        date: "1900-02-19T10:00:00Z",
         level: 1,
         description: "Arnaque vente de bois",
       },
       {
-        date: new Date(1900, 2, 20, 15, 1, 0),
+        date: "1900-02-19T15:22:00Z",
         level: 3,
         description: "Non respect arbre",
       },
