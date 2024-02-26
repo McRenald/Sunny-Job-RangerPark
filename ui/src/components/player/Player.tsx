@@ -15,7 +15,7 @@ const Player = (props: { onAddCrime: any }) => {
   };
 
   const handleCloseClick = () => {
-    visibility.setVisible(false);
+    fetchNui("sunny-job-rangerpark:nui:hideFrame");
   };
 
   return (
@@ -23,7 +23,7 @@ const Player = (props: { onAddCrime: any }) => {
       <Label label="Nom" content={playerCtx.name} />
       <Label
         label="Date de naissance"
-        content={playerCtx.birthDay ? new Date(playerCtx.birthDay).toDateString() : "NC"}
+        content={playerCtx.birthDay ? new Date(playerCtx.birthDay).toLocaleDateString() : "NC"}
       />
       <Button content="Recharger" onClick={handleReloadClick} />
       <Button content="Ajouter un crime" onClick={props.onAddCrime} />
