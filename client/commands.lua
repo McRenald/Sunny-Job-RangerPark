@@ -1,20 +1,13 @@
 
 -- Commands
-RegisterCommand("rpnext", function ()
-    TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
+RegisterCommand("rp_start", function()
+    TriggerEvent("sunny-job-rangerpark:client:start-mission")
 end, false)
 
-RegisterCommand("rpclear", function ()
-    if NextMission ~= nil then
-        DeleteMissionPrompt(NextMission)
-        DeleteMission(NextMission)
-    else
-        QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-missions", function(missions)
-            for key, value in pairs(missions) do
-                DeleteMissionPrompt(value)
-                DeleteMission(value)
-            end
-        end)
-    end
-    HasMissionPrompt = false
+RegisterCommand("rp_stop", function()
+    TriggerEvent("sunny-job-rangerpark:client:stop-mission")
+end, false)
+
+RegisterCommand("rp_ui", function()
+    TriggerEvent("sunny-job-rangerpark:client:showCriminalRecords")
 end, false)

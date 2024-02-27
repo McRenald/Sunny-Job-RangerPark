@@ -5,10 +5,28 @@ rdr3_warning "I acknowledge that this is a prerelease build of RedM, and I am aw
 description "Sunny RangerPark Job"
 version "0.0.1"
 
-shared_script "config.lua"
+shared_scripts {
+	"shared/config.lua",
+	"shared/functions.lua"
+}
 
-server_script "server/*.lua"
-client_script "client/*.lua"
+server_scripts {
+	"server/server.lua"
+}
+
+client_scripts {
+	"client/client.lua",
+	"client/client.ui.lua",
+	"client/commands.lua",
+	"client/events.lua",
+	"client/functions.lua",
+}
+
+ui_page 'ui/build/index.html'
+files {
+	'ui/build/index.html',
+	'ui/build/**/*'
+}
 
 dependencies {
 	"qbr-core",

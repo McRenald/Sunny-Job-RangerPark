@@ -1,0 +1,15 @@
+.nuiButton {
+  width: 100%;
+  background: #e3dda4;
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  color: #736e3c;
+  font-family: "Maiden Orange";
+  font-size: larger;
+  padding: 10px 20px 10px 20px;
+  border: solid #d9cf75 1px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+

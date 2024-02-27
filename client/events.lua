@@ -1,6 +1,24 @@
+-- Events: Missions
+RegisterNetEvent("sunny-job-rangerpark:client:start-mission", function()
+    TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
+end)
 
--- Events
-RegisterNetEvent("sunny-job-rangerpark:client:get-next-mission", function ()
+RegisterNetEvent("sunny-job-rangerpark:client:stop-mission", function()
+    if NextMission ~= nil then
+        DeleteMissionPrompt(NextMission)
+        DeleteMission(NextMission)
+    else
+        QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-missions", function(missions)
+            for key, value in pairs(missions) do
+                DeleteMissionPrompt(value)
+                DeleteMission(value)
+            end
+        end)
+    end
+    HasMissionPrompt = false
+end)
+
+RegisterNetEvent("sunny-job-rangerpark:client:get-next-mission", function()
     if NextMission == nil then
         QbrCore:TriggerCallback("sunny-job-rangerpark:server:get-next-mission", function(nextMission)
             print("Next Mission", nextMission.id)
@@ -32,7 +50,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
             TaskPlayAnim(ped, dict, "base", 8.0, 8.0, -1, 1, 0, false, false, false)
         end)
 
-        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 2000, false, false, {
+        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 7000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = true,
@@ -42,23 +60,45 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
             RemoveAnimDict(dict)
             Wait(700)
             ClearPedTasks(ped)
-            
-            -- Add money to bank account
-            local payment = 0
-            QbrCore:GetPlayerData(function(PlayerData)
-                --if playerData.job.onDuty then
-                payment = PlayerData.job.payment
-                QbrCore:TriggerCallback("sunny-job-rangerpark:server:apply-mission-reward")
-                --end
-            end)
-            
-            -- Notify the player
-            QbrCore:Notify(7, "Bon travail !", 5000, "Vous avez gangé $" .. payment)
-            
-            -- Clear
-            DeleteMission(mission)
-            
-            IsMissionProcessing = false
+
+            -- Reward
+            QbrCore:TriggerCallback("sunny-job-rangerpark:server:apply-mission-reward")
         end)
     end
+end)
+
+RegisterNetEvent("sunny-job-rangerpark:client:mission-completed", function(payment)
+    -- Notify the player
+    QbrCore:Notify(7, "Bon travail !", 5000, "Vous gagnez $" .. payment .. " et 1 certificat")
+
+    -- Clear
+    DeleteMission(NextMission)
+
+    IsMissionProcessing = false
+
+    -- Continue mission
+    Citizen.SetTimeout(1000, function()
+        TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
+    end)
+end)
+
+-- Events: CriminalRecords
+RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
+    local playerId = PlayerId()
+    local closestPlayer, closestPlayerDistance = QbrCore:GetClosestPlayer(GetEntityCoords(playerId))
+    
+    -- DEBUG: Force to use my player
+    closestPlayer = playerId;
+    closestPlayerDistance = 1;
+
+    if closestPlayer ~= -1 and closestPlayerDistance < 3 then
+        Functions.ToggleNuiFrame(true)
+        TriggerServerEvent("sunny-job-rangerpark:server:get-criminal-records", GetPlayerServerId(closestPlayer));
+    else
+        QbrCore:Notify(2, "Aucune personne proche !", 5000);
+    end
+end)
+
+RegisterNetEvent('sunny-job-rangerpark:client:loadCriminalRecords', function(playerData)
+    Functions.SendReactMessage('loadCriminalRecords', playerData)
 end)
