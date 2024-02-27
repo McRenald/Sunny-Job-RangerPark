@@ -1,5 +1,4 @@
-
--- Events
+-- Events: Missions
 RegisterNetEvent("sunny-job-rangerpark:client:start-mission", function()
     TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
 end)
@@ -81,4 +80,25 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-completed", function(payme
     Citizen.SetTimeout(1000, function()
         TriggerEvent("sunny-job-rangerpark:client:get-next-mission")
     end)
+end)
+
+-- Events: CriminalRecords
+RegisterNetEvent('sunny-job-rangerpark:client:showCriminalRecords', function()
+    local playerId = PlayerId()
+    local closestPlayer, closestPlayerDistance = QbrCore:GetClosestPlayer(GetEntityCoords(playerId))
+    
+    -- DEBUG: Force to use my player
+    closestPlayer = playerId;
+    closestPlayerDistance = 1;
+
+    if closestPlayer ~= -1 and closestPlayerDistance < 3 then
+        Functions.ToggleNuiFrame(true)
+        TriggerServerEvent("sunny-job-rangerpark:server:get-criminal-records", GetPlayerServerId(closestPlayer));
+    else
+        QbrCore:Notify(2, "Aucune personne proche !", 5000);
+    end
+end)
+
+RegisterNetEvent('sunny-job-rangerpark:client:loadCriminalRecords', function(playerData)
+    Functions.SendReactMessage('loadCriminalRecords', playerData)
 end)
