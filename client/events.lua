@@ -50,7 +50,7 @@ RegisterNetEvent("sunny-job-rangerpark:client:mission-processing", function(miss
             TaskPlayAnim(ped, dict, "base", 8.0, 8.0, -1, 1, 0, false, false, false)
         end)
 
-        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 7000, false, false, {
+        QbrCore:Progressbar("rangerpark_mission_process_tree", "Traitement", 3000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = true,
