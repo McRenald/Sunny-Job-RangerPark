@@ -9,6 +9,9 @@ This resource represents the job for Ranger Park
 Located around a city, ranger has to move to different place where it can take care of animals and trees, monitor the surroundings.
 Once an action is done, the ranger win money and get a voucher, which is sellable to export.
 
+- Criminal Records
+Display criminal records of the closest player, create new one.
+
 ## Dependencies
 
 - qbr-core
